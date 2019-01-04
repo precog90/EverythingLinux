@@ -1,0 +1,43 @@
+After installing git, make local repository as git repository:
+
+git init
+
+Stage the files for first commit:
+
+git add .            ## It stages all the files in current directory for the commit
+
+git commit -a -m "First commit"      ##Commits all the tracked changes with the message First commit and prepares for push to remote.
+
+git log #show previous commits
+
+git status #Shows which branch you are on and the changes
+
+#Staging the changes
+If we makes changes to the tracked project, it does not automatically get staged for commit
+use git add filename to add files which have been modified. 
+
+git add . - will add all the files in the current directory for staging
+
+#Skipping staging
+
+commit -a -m "First commit" - -a option commits all the files and doesnot matter if staged or not. 
+
+#Rollback to previous file
+If you accidently make changes, or delete a file you can get it back how it was in the last commit by 
+
+git checkout -- filename
+
+
+
+#To push changes to the github
+Copy the URL of the GitHub Repository
+Add the remote directory with the name origin
+git remote add origin remoteRepositoryURL
+git remote -v #verifies the URL added
+git push origin master #Pushes the changes in your local repo to github
+
+
+
+
+
+
