@@ -27,7 +27,9 @@ If you accidently make changes, or delete a file you can get it back how it was 
 
 git checkout -- filename
 
-
+# Merging changes between local master branch and remote origin project
+git pull origin master
+#This will pull the code from remote and do a merge with the local repo. If there are any inconsistencies, resolve and then try again.
 
 #To push changes to the github
 Copy the URL of the GitHub Repository
