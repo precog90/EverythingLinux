@@ -1,19 +1,22 @@
 To generate SSH Public-Private Key Pair:
 ssh-keygen
 It will ask for a passphrase to encrypt the private key. If you don't want a passphrase press Enter and Enter
-Passphrase is used everytime private is accessed to decrypt it. 
+Passphrase is used everytime private key is accessed to decrypt it. 
 
 By default, this public and private key is stored in ~/.ssh/ folder. 
 To use public key for authentication, this needs to be transported over to the machine where SSH server is running and loaded into ~/.ssh/authorized_keys file
-To do this use following command on your client machine:
+To do this use the following command on your client machine:
 
 ssh-copy-id -i ~/.ssh/id_rsa.pub amrinder@chef-admin
 -i : identity and translates to location of the public key
-If you have not changed the default location for key storage, you can just use:
+If you have not changed the default location for public key storage, you can just use:
 ssh-copy-id amrinder@chef-admin
-This will login chef-admin machine using amrinder username, you have to enter the password and uploads the public key in ~/.ssh/authorized_keys folder
+chef-admin: Server Name
+amrinder: Username
 
-If you encrypt the key, everytime you ssh to a machine it will ask for the passphrase to access the private key which is no different than using a username/password.
+This will login chef-admin machine using amrinder username, you have to enter the password and it uploads the public key in ~/.ssh/authorized_keys folder
+
+If you encrypt the key, everytime you ssh to a machine it will ask for the passphrase to access the private key which is no different than using a password.
 
 =====
 
@@ -33,7 +36,7 @@ SSH Tunneling
 
 amrinder@chef-admin:~$ sudo ssh -L 1254:localhost:80 asingh@chef-node2
 
-This creates a listening port 1254 on localhost. If you go to that port, traffic will be tunneled over the SSH connection to chef-node(user asing) and then when on chef-node2 sent to port 80 of the chef-node2
+This creates a listening port 1254 on localhost. If you go to that port, traffic will be tunneled over the SSH connection to chef-node2(user asingh) and then when on chef-node2 sent to port 80 of the chef-node2(server localhost)
 
 Once ssh session is spawned, test it using wget or through the browser on localhost:
 
@@ -51,11 +54,11 @@ index.html                          100%[=======================================
 
 2019-01-26 21:20:19 (13.1 MB/s) - ‘index.html’ saved [285/285]
 
-Another example to go to another machine on the LAN:
+Another example to go to another machine on the LAN using SSH tunneling:
 
 amrinder@chef-admin:~$ sudo ssh -L 1255:chef-node1:22 asingh@chef-node2
 
-localhost 1255 port will redirect to chef-node port 22 
+localhost 1255 port will redirect to chef-node port 22 via chef-node1
 
 amrinder@chef-admin:~/EverythigLinux/SSH$ ssh -p 1255 asingh@localhost
 Linux chef-node1 4.17.0-kali1-amd64 #1 SMP Debian 4.17.8-1kali1 (2018-07-24) x86_64
@@ -70,6 +73,3 @@ Last login: Sat Jan 26 21:04:21 2019 from 192.168.2.41
 asingh@chef-node1:~$ 
 
 It did not ask for password because public key authentication is configured.
-
-
-
