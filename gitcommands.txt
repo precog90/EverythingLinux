@@ -38,6 +38,20 @@ git remote add origin remoteRepositoryURL
 git remote -v #verifies the URL added
 git push origin master #Pushes the changes in your local repo to github
 
+#List of branch
+C:\Personal\Git\EverythingLinux>git branch
+* 12Feb2019
+  master
+  
+#Create a branch
+C:\Personal\Git\EverythingLinux>git branch 12Feb2019
+
+#Switch to branch
+C:\Personal\Git\EverythingLinux>git checkout 12Feb2019
+Switched to branch '12Feb2019'
+
+
+
 
 
 

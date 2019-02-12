@@ -73,3 +73,100 @@ Last login: Sat Jan 26 21:04:21 2019 from 192.168.2.41
 asingh@chef-node1:~$ 
 
 It did not ask for password because public key authentication is configured.
+
+======
+
+Reverse SSH Tunneling
+LAN to Outside SSH Allowed
+Outside to LAN SSH Not Allowed 
+
+To SSH to the LAN Box from Outside, Login to your LAN Server - Spawn a SSH session with -R flag to the outside box - this will create a reverse tunnel from Outside to Inside
+
+ssh -R 8888:localhost:80 outside_server
+
+Originated from LAN, this will create a listening port 8888 on the outside server which will relay the traffic to LAN server on port 80. 
+
+Reverse tunnel works the same as regular tunnel but it is initiated from the LAN side. 
+
+========
+
+SSH Persistent connection with Bash Loop
+
+-N: Non Interactive Session
+-L: Local Tunnel
+
+amrinder@:~$ ssh -N -L 8000:192.168.160.10:22 admin@192.168.160.10    
+admin@192.168.160.10's password: 
+
+This will create an SSH session which will not display anything on screen but is connected to the server
+Goal is to create a bash script that will reconnect when SSH is disconnected because of some reason
+
+SSH Script:
+amrinder@:~$ cat ~/persistentssh.sh 
+#!/bin/sh
+while true
+do
+ ssh -N -L 8000:192.168.160.10:22 admin@192.168.160.10  
+ echo  "Something went wrong restarting"
+done
+amrinder@:~$ 
+
+If you kill the process, script will restart it again. 
+
+============
+Persistent SSH with autossh
+A better way to establish persistent ssh tunnels [Probably best way if you can install it on the server]
+
+-- robust network checks
+-- still requires keypairs
+-- not usually installed by default
+
+amrinder@:~/.ssh$ autossh -M 20000 -N -f wksadmin@192.168.160.10
+
+-M: SSH echo service
+From autossh manpage: 
+-M port[:echo_port]
+             specifies the base monitoring port to use. Without the echo port, this port and the port immediately above it ( port + 1) should be something nothing else is using.
+             autossh will send test data on the base monitoring port, and receive it back on the port above. For example, if you specify “-M 20000”, autossh will set up forwards so
+             that it can send data on port 20000 and receive it back on 20001.
+			 
+-N: no commands just a session for forwarding
+-f: Password/Key Prompt in the background
+
+If network connection goes down for 30 mins, autossh will keep trying and bring tunnels back once network restores
+==============
+
+SSH Socks Proxy
+
+-- Quick and Dirty VPN for browser(web traffic)
+-- Location Hacking
+-- Coffeeshop peace of mind. SSH to home and tunnel back
+
+ssh -D 1080 [username]@[remote.server.name]
+
+-D 1080 starts a local SOCKS server which will carry all your traffic via SSH once SOCKS proxy is configured in browser to localhost port 1080
+
+==============
+
+VPN with sshuttle
+
+-- No proxy config
+-- routes non-web traffic 
+-- Available in every linux distribution
+-- TCP Traffic Only No UDP support
+-- Route all your traffic through ssh session
+
+amrinder@:~/.ssh$ sudo sshuttle -r wksadmin@192.168.160.10 0.0.0.0/0 
+-r remote computer
+0.0.0.0/0 all traffic
+
+
+
+
+
+
+
+
+
+
+
