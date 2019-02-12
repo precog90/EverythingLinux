@@ -50,6 +50,15 @@ C:\Personal\Git\EverythingLinux>git branch 12Feb2019
 C:\Personal\Git\EverythingLinux>git checkout 12Feb2019
 Switched to branch '12Feb2019'
 
+#Merge Changes
+Do the changes on the branch
+Commit the changes
+Checkout the master
+> git checkout master
+Merge the branch
+> git merge 12Feb2019
+
+
 
 
 
