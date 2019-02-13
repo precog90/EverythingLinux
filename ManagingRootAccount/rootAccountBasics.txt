@@ -1,0 +1,46 @@
+** Don't use root as a normal user
+** Root privelege should be temporary
+** In Red Hat or Cent OS you set a root password at the start
+** In Debian Ubuntu it is not mandatory by default you use sudo for root access
+** A hack in Debian Ubuntu to become root even if the password is not set is to use "sudo su -" which says run as root and the command is to get login prompt of root.Exit out once done.
+
+
+su -l 
+Gives you access to root user login prompt once you enter root password
+-l: login prompt 
+
+su -
+defaults to su -l
+
+su -l -c "ls /root/"
+It will ask for the root password and then execute that single command as root
+amrinder@:~$ su -l -c "whoami"
+Password: 
+root
+
+sudo ls /
+will ask for user's password and then become root only for this command. This way you don't have to tell people the root password but they can still run commands with root access.
+
+================
+** sudoers file is in /etc/sudoers
+**visudo is the way to ensure you get the syntax correct when editing sudoers file
+**last match wins
+Sections
+username		host	=	(user:group)	TAG:command
+%groupname		host	=	(user:group)	TAG:command
+
+host: what hostname will this particular line of configuration work once. If you are sharing a sudoers file you can specify which host you are talking about
+(user:group): user or group has the permissions to run commands as (user:group)
+TAG: Example NOPASSWD
+Everyone of these keywords can be replaced by the ALL(host is mostly set to ALL)
+root    ALL=(ALL:ALL) ALL
+%sudo   ALL=(ALL:ALL) ALL
+
+root user
+sudo group
+Very first user you create goes as part of the sudo group
+nugget1 ALL=(ALL) NOPASSWD: /bin/ls
+nugget1 on all hosts as any user or group without typing the password
+
+======================
+
