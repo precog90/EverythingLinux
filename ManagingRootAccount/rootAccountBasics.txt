@@ -42,5 +42,44 @@ Very first user you create goes as part of the sudo group
 nugget1 ALL=(ALL) NOPASSWD: /bin/ls
 nugget1 on all hosts as any user or group without typing the password
 
+amrinder@:~$ cat /etc/group | grep sudo 
+sudo:x:27:amrinder
 ======================
+
+/etc/ssh/sshd_config
+Default PermitRootLogin is yes
+
+PermitRootLogin yes|no|prohibit-password 
+
+prohibit-password: You can login as root but only if private public key pair is setup. Not with password
+
+public key is not depended on what user's name is in it as ID. You can use the same key for any user till the time you have the private key.
+
+amrinder@:/home$ 
+amrinder@:/home$ sudo cp ~/.ssh/authorized_keys /root/.ssh/ 
+amrinder@:/home$ 
+amrinder@:/home$ cat ~/.ssh/authorized_keys 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDAVI6fNB5KJ9DyNJhc53z8SPFpqlhBXj57qFc8PwcP3tiGb8i1Bwhh+ti42JlaRynwy5nyK7JoSBYlc8wYcU7xDJNkMpsw6yDZEBqm6S++e3/VzI81xxMW87VR1E3jwRDn2j67anzd9sT8ZD4tN09fhD+0JBvEn6qayp4hwl+WIQ== amrinder-ubuntu-wks-desklab
+amrinder@:/home$ 
+
+It worked with public key after copying the authorized_keys from .ssh of amrinder to /root/.ssh/authorized_keys  of root
+
+=====================
+
+Root Password Recovery:
+If you have sudo access, you just use sudo and change the password. Lets assume you dont have sudo access.
+As long as you have physical access and be at the console, and reboot it.
+Reboot > Press E > Kernel Init Line>
+Single User Mode [Change the settings of init daemon at the boot to go to single user bash prompt]
+Mouting r/w Mode [root partition will be ro - change to rw]
+Change the password using passwd
+
+========================
+
+
+
+
+
+
+
 
