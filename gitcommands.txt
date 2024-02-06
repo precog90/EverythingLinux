@@ -58,9 +58,15 @@ Checkout the master
 Merge the branch
 > git merge 12Feb2019
 
+#Set-up Upstream repository which is different from your fork
+> git remote add upstream git@github.com:githubabcs/gh-abcs-actions.git
 
-
-
+#Validate Upstream repository
+PS C:\Users\SinghA1\OneDrive - SSC-SPC\Desktop\Data\CSPM\CSPM Git\gh-abcs-actions> git remote -v                                          
+origin  https://github.com/precog90/gh-abcs-actions.git (fetch)
+origin  https://github.com/precog90/gh-abcs-actions.git (push)
+upstream        git@github.com:githubabcs/gh-abcs-actions.git (fetch)
+upstream        git@github.com:githubabcs/gh-abcs-actions.git (push)
 
 
 
