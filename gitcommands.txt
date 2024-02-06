@@ -42,6 +42,16 @@ git push origin master #Pushes the changes in your local repo to github
 C:\Personal\Git\EverythingLinux>git branch
 * 12Feb2019
   master
+
+#To see all local and remote branches
+> git branch -va
+* main                                                                 c609ada Update README.md
+  remotes/origin/HEAD                                                  -> origin/main
+  remotes/origin/main                                                  c609ada Update README.md
+  remotes/upstream/CalinL-patch-1                                      9fa27d1 Update README.md
+  remotes/upstream/dependabot/github_actions/actions/github-script-7   2079983 Bump actions/github-script from 6 to 7
+  remotes/upstream/dependabot/github_actions/actions/setup-node-4      9518005 Bump actions/setup-node from 3 to 4
+
   
 #Create a branch
 C:\Personal\Git\EverythingLinux>git branch 12Feb2019
@@ -59,14 +69,17 @@ Merge the branch
 > git merge 12Feb2019
 
 #Set-up Upstream repository which is different from your fork
-> git remote add upstream git@github.com:githubabcs/gh-abcs-actions.git
+> git remote add upstream https://github.com/githubabcs/gh-abcs-actions.git
 
-#Validate Upstream repository
-PS C:\Users\SinghA1\OneDrive - SSC-SPC\Desktop\Data\CSPM\CSPM Git\gh-abcs-actions> git remote -v                                          
+#Check Remtoe Repositories
+> git remote -v                                          
 origin  https://github.com/precog90/gh-abcs-actions.git (fetch)
 origin  https://github.com/precog90/gh-abcs-actions.git (push)
-upstream        git@github.com:githubabcs/gh-abcs-actions.git (fetch)
-upstream        git@github.com:githubabcs/gh-abcs-actions.git (push)
+upstream        https://github.com/githubabcs/gh-abcs-actions.git (fetch)
+upstream        https://github.com/githubabcs/gh-abcs-actions.git (push)
+
+
+
 
 
 
